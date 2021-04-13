@@ -17,4 +17,5 @@ USAGE EXAMPLE - jenkins-cli "jenkinserver" "testuser" "testpass"
 
 INSTALLATION -
 
-           git clone
+           git clone https://github.com/RamSailopal/jenkins-cli.git
+           mv jenkins-cli/jenkins-cli /usr/local/bin
