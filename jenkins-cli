@@ -1,0 +1,40 @@
+#!/usr/bin/python
+import requests
+import sys
+import json
+if (len(sys.argv)<4):
+   print("Please pass the address of the Jenkins server as well as the username and password for authentication as parameters")
+   sys.exit(1)
+if (sys.argv[1] == ""):
+   print("Please enter the address of the Jenkins server")
+   sys.exit(1)
+if (sys.argv[1] == ""):
+   print("Please enter the username for authentication against the Jenkins server")
+   sys.exit(1)
+if (sys.argv[3] == ""):
+   print("Please enter the password for authentication against the Jenkins server")
+   sys.exit(1)
+job=""
+if (len(sys.argv)==5):
+   job=sys.argv[4]
+url = "http://" + sys.argv[1] + ":8080/api/json?pretty=true"
+data = requests.get(url,auth=(sys.argv[2], sys.argv[3]))
+cnt=0
+for i in data.json()["jobs"]:
+   col="\033[39m"
+   if (data.json()["jobs"][cnt]["color"] == "blue"):
+      stat="Passed"
+      col="\033[34m"
+   elif (data.json()["jobs"][cnt]["color"] == "notbuilt"):
+      stat="Not built"
+      col="\033[35m"
+   elif (data.json()["jobs"][cnt]["color"] == "disabled"):
+      stat="Disabled"
+      col="\033[90m"
+   else:
+      stat="Failed" 
+      col="\033[91m"
+   if (job=="" or data.json()["jobs"][cnt]["name"]==job):
+      print(col + data.json()["jobs"][cnt]["name"] + " - " + stat)
+   cnt=cnt+1
+print("\033[39m")
