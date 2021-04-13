@@ -13,7 +13,9 @@ PARAMETERS -
           If left blank, will search all jobs
 
 
-USAGE EXAMPLE - jenkins-cli "jenkinserver" "testuser" "testpass"
+USAGE EXAMPLE - 
+
+           jenkins-cli "jenkinserver" "testuser" "testpass"
 
 INSTALLATION -
 
